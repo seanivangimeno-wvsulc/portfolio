@@ -1,0 +1,43 @@
+[
+  {
+    "category": "Artificial Intelligence",
+    "icon": "🤖",
+    "skills": [
+      { "name": "Python", "level": 85 },
+      { "name": "Prompt Engineering", "level": 92 },
+      { "name": "LLM Integration", "level": 88 },
+      { "name": "Fine-Tuning Models", "level": 80 },
+      { "name": "TensorFlow / PyTorch", "level": 75 }
+    ]
+  },
+  {
+    "category": "ICT Core & Web Development",
+    "icon": "💻",
+    "skills": [
+      { "name": "HTML5 / CSS3", "level": 90 },
+      { "name": "JavaScript (ES5/ES6)", "level": 88 },
+      { "name": "PHP", "level": 82 },
+      { "name": "Responsive Web Design", "level": 90 }
+    ]
+  },
+  {
+    "category": "Databases & Tools",
+    "icon": "⚙️",
+    "skills": [
+      { "name": "MySQL / PostgreSQL", "level": 85 },
+      { "name": "Git / GitHub", "level": 88 },
+      { "name": "VS Code", "level": 92 },
+      { "name": "Jupyter Notebooks", "level": 90 }
+    ]
+  },
+  {
+    "category": "Systems & Networking",
+    "icon": "🌐",
+    "skills": [
+      { "name": "Linux / Bash Scripting", "level": 80 },
+      { "name": "Computer Networking", "level": 85 },
+      { "name": "System Administration", "level": 82 },
+      { "name": "Docker Basics", "level": 75 }
+    ]
+  }
+]
