@@ -1,0 +1,79 @@
+[
+  {
+    "id": 7,
+    "title": "My Journey as an ICT Student Entering the World of AI",
+    "excerpt": "How I transitioned from traditional ICT studies into machine learning, and how I built my first AI-powered retro game.",
+    "category": "personal",
+    "tags": ["personal", "ai", "student-life"],
+    "date": "2026-06-22",
+    "icon": "🎓",
+    "url": "blog-post.html?id=7",
+    "content": "As an Information and Communications Technology (ICT) student, I spent a lot of time learning standard web systems, networking protocols, and databases. But my perspective changed when I underwent an intensive AI training program. In this post, I share my journey of diving into machine learning, learning TensorFlow.js, and building Teachable Dino—a retro platformer controlled entirely via custom webcam gesture models. Discover how you can bridge traditional development with AI today."
+  },
+  {
+    "id": 1,
+    "title": "Building Scalable Mobile Apps with Microservices",
+    "excerpt": "Learn how to architect mobile applications using a microservices backend for better scalability and maintainability.",
+    "category": "architecture",
+    "tags": ["microservices", "mobile", "backend"],
+    "date": "2026-05-15",
+    "icon": "🏗️",
+    "url": "blog-post.html?id=1",
+    "content": "When building mobile applications that need to scale to millions of users, a monolithic architecture quickly becomes a bottleneck. In this post, I'll walk through how we migrated FoodDash from a monolith to a microservices architecture. We'll cover service decomposition, API gateway patterns, database per service, inter-service communication with message queues, and deployment strategies with Kubernetes. The result was a 3x improvement in deployment frequency and 99.99% uptime."
+  },
+  {
+    "id": 2,
+    "title": "Optimizing React Native Performance",
+    "excerpt": "Practical techniques for improving render performance, reducing bundle size, and enhancing user experience in React Native apps.",
+    "category": "engineering",
+    "tags": ["react-native", "performance", "mobile"],
+    "date": "2026-04-28",
+    "icon": "⚡",
+    "url": "blog-post.html?id=2",
+    "content": "React Native performance optimization is crucial for delivering a smooth user experience. This article covers profiling with the React DevTools, optimizing FlatList for large datasets, reducing JavaScript bundle size with Metro configuration, using Hermes engine, implementing image caching strategies, and avoiding common performance pitfalls. Real-world benchmarks show a 40% reduction in time-to-interactive."
+  },
+  {
+    "id": 3,
+    "title": "CI/CD Pipelines for Mobile Apps",
+    "excerpt": "Setting up automated build, test, and deployment pipelines for iOS and Android applications.",
+    "category": "devops",
+    "tags": ["ci-cd", "mobile", "automation"],
+    "date": "2026-03-10",
+    "icon": "🔄",
+    "url": "blog-post.html?id=3",
+    "content": "Automating mobile app delivery is essential for teams that ship frequently. This guide covers setting up GitHub Actions for React Native apps, automated testing on physical devices via AWS Device Farm, code signing management, beta distribution with TestFlight and Play Console, staged rollouts, and monitoring crash reports with Sentry integration."
+  },
+  {
+    "id": 4,
+    "title": "Designing RESTful APIs That Developers Love",
+    "excerpt": "Best practices for API design including versioning, error handling, pagination, and documentation.",
+    "category": "architecture",
+    "tags": ["api", "rest", "backend"],
+    "date": "2026-02-22",
+    "icon": "🔌",
+    "url": "blog-post.html?id=4",
+    "content": "A well-designed API is a joy to work with. This post covers RESTful API design principles: resource naming conventions, proper use of HTTP methods and status codes, pagination strategies (cursor vs offset), versioning approaches, error response formats, rate limiting, and auto-generated documentation with OpenAPI. Includes practical examples from production APIs."
+  },
+  {
+    "id": 5,
+    "title": "Machine Learning on Mobile Devices",
+    "excerpt": "Running ML models directly on-device with TensorFlow Lite and Core ML for real-time features.",
+    "category": "ai",
+    "tags": ["machine-learning", "mobile", "ai"],
+    "date": "2026-01-15",
+    "icon": "🤖",
+    "url": "blog-post.html?id=5",
+    "content": "On-device machine learning enables real-time features without network latency. This article explores model conversion from TensorFlow to TFLite, quantization techniques for size reduction, platform-specific acceleration with Core ML and Android NN API, and real-world use cases like image classification, pose estimation, and natural language processing in mobile apps."
+  },
+  {
+    "id": 6,
+    "title": "The Developer's Guide to WebSockets",
+    "excerpt": "Implementing real-time features with WebSockets for chat, live updates, and collaborative editing.",
+    "category": "engineering",
+    "tags": ["websocket", "real-time", "fullstack"],
+    "date": "2025-12-08",
+    "icon": "🔗",
+    "url": "blog-post.html?id=6",
+    "content": "Real-time features are expected in modern applications. This guide covers WebSocket fundamentals, implementing a chat system with Socket.io, handling reconnection and presence, scaling WebSockets with Redis Pub/Sub, and security considerations including origin checking and authentication. Includes complete code examples for both client and server."
+  }
+]

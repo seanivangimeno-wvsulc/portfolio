@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "title": "Kiosk WVSU LC",
+    "summary": "Event management kiosk system built for WVSU LC. Features event scheduling, attendance tracking, and real-time status updates.",
+    "description": "A full-featured event management kiosk system designed for West Visayas State University - Lambunao Campus. Built with TypeScript and Next.js, it handles event scheduling, attendee registration, QR code check-ins, and real-time status dashboards. Deployed on Vercel for scalability.",
+    "icon": "🏛️",
+    "tags": ["web", "fullstack"],
+    "tech": ["TypeScript", "Next.js", "Vercel", "PostgreSQL"],
+    "features": [
+      "Event scheduling and management",
+      "QR code attendee check-in",
+      "Real-time status dashboards",
+      "Responsive kiosk interface"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/kiosk-wvsu-lc",
+    "live": "https://kiosk-wvsu-lc.vercel.app"
+  },
+  {
+    "id": 2,
+    "title": "Flappy Clone",
+    "summary": "A browser-based Flappy Bird clone built with vanilla HTML, CSS, and JavaScript. Arcade-style gameplay with retro visuals.",
+    "description": "A faithful recreation of the classic Flappy Bird game built entirely with vanilla web technologies. Features smooth physics, collision detection, score tracking, and retro-styled visuals. Deployed and playable directly in the browser via Vercel.",
+    "icon": "🐦",
+    "tags": ["web", "game"],
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "features": [
+      "Smooth arcade physics engine",
+      "Collision detection system",
+      "Score tracking with persistence",
+      "Retro pixel-art visual style"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/flappy_clone",
+    "live": "https://flappy-clone-three.vercel.app"
+  },
+  {
+    "id": 3,
+    "title": "SaligAI",
+    "summary": "AI-powered assistant designed to support persons with disabilities (PWD) through voice commands, accessibility features, and intelligent task automation.",
+    "description": "SaligAI is an accessibility-focused AI assistant built with TypeScript that helps persons with disabilities navigate daily tasks through voice commands, screen reader optimization, and intelligent automation. Features include voice-activated controls, text-to-speech responses, and customizable accessibility profiles.",
+    "icon": "♿",
+    "tags": ["web", "ai"],
+    "tech": ["TypeScript", "AI/ML", "Web Speech API", "Accessibility APIs"],
+    "features": [
+      "Voice command recognition and execution",
+      "Text-to-speech response system",
+      "Customizable accessibility profiles",
+      "Intelligent task automation workflows"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/SaligAI",
+    "live": ""
+  },
+  {
+    "id": 4,
+    "title": "ColorPointer",
+    "summary": "Real-time hand gesture color changer using computer vision. Control your screen colors with hand movements via webcam.",
+    "description": "An interactive computer vision application that tracks hand gestures through the webcam to dynamically change screen colors in real-time. Built with TypeScript and MediaPipe hand tracking, it detects finger positions and gestures to control a virtual color palette.",
+    "icon": "✋",
+    "tags": ["web", "ai"],
+    "tech": ["TypeScript", "MediaPipe", "Computer Vision", "Webcam API"],
+    "features": [
+      "Real-time hand gesture tracking via webcam",
+      "Dynamic color palette control",
+      "MediaPipe-powered finger detection",
+      "Low-latency visual feedback"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/colorpointer",
+    "live": ""
+  },
+  {
+    "id": 5,
+    "title": "Chess Game",
+    "summary": "Full chess game implementation with move validation, AI opponent, and clean TypeScript architecture.",
+    "description": "A complete chess game built from scratch in TypeScript featuring full move validation (including castling, en passant, and pawn promotion), an AI opponent with minimax algorithm, and a clean terminal-based interface. Demonstrates strong algorithmic thinking and game logic implementation.",
+    "icon": "♟️",
+    "tags": ["web", "game"],
+    "tech": ["TypeScript", "Algorithms", "Game Logic"],
+    "features": [
+      "Complete chess move validation",
+      "AI opponent with minimax algorithm",
+      "Castling, en passant, and pawn promotion",
+      "Clean modular architecture"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/Chess",
+    "live": ""
+  },
+  {
+    "id": 6,
+    "title": "Teachable Dino",
+    "summary": "An AI-powered 8-bit retro platformer runner controlled using trained machine learning webcam gesture inputs.",
+    "description": "Designed and built an interactive retro game environment integrated with Google's Teachable Machine API. Users can train a custom image classification model in their browser and control the game character's actions hands-free using real-time webcam gestures.",
+    "icon": "🦖",
+    "tags": ["web", "ai", "game"],
+    "tech": ["TypeScript", "TensorFlow.js", "Teachable Machine", "Webcam API"],
+    "features": [
+      "Real-time gesture recognition via webcam",
+      "Hands-free game controls",
+      "Custom model training in browser",
+      "8-bit retro platformer gameplay"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/dinorun",
+    "live": ""
+  },
+  {
+    "id": 7,
+    "title": "Portfolio Website",
+    "summary": "This portfolio site — a vanilla HTML/CSS/JS static site with dark/light theme, animations, and JSON-driven content.",
+    "description": "A premium, hand-crafted portfolio website built with zero frameworks — just vanilla HTML, CSS, and JavaScript. Features include dark/light theme toggle with localStorage persistence, scroll-triggered reveal animations, JSON-driven project and blog data, a contact form with validation, and fully responsive design.",
+    "icon": "👨‍💻",
+    "tags": ["web", "fullstack"],
+    "tech": ["HTML", "CSS", "JavaScript", "CSS Custom Properties"],
+    "features": [
+      "Dark/light theme with localStorage persistence",
+      "Scroll-triggered reveal animations",
+      "JSON-driven dynamic content",
+      "Responsive design across all devices"
+    ],
+    "github": "https://github.com/seanivangimeno-wvsulc/portfolio",
+    "live": "https://portfolio-sean26.vercel.app"
+  }
+]

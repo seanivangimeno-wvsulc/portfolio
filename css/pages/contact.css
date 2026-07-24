@@ -1,0 +1,198 @@
+/* === Contact Form === */
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: flex-start;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.contact__form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.contact__submit {
+  align-self: flex-start;
+}
+
+.contact__form-status {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  display: none;
+}
+
+.contact__form-status.success {
+  display: block;
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.contact__form-status.error {
+  display: block;
+  background: var(--color-error-muted);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+/* === Contact Info === */
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.contact__info-title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-3);
+}
+
+.contact__info-description {
+  font-size: var(--fs-base);
+  color: var(--color-fg-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.contact__info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact__info-item:hover {
+  border-color: var(--color-accent);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0, 212, 170, 0.1);
+}
+
+.contact__info-item-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-muted);
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact__info-item:hover .contact__info-item-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.contact__info-item-content {
+  font-size: var(--fs-sm);
+}
+
+.contact__info-item-label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+.contact__info-item-value {
+  color: var(--color-fg-muted);
+}
+
+.contact__social {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.contact__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-muted);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact__social-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-muted);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 212, 170, 0.2);
+}
+
+/* === Availability === */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+
+.availability__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 2s infinite;
+}
+
+/* === Form Field Error === */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-field .input.error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-muted);
+}
+
+.form-field .field-error {
+  font-size: var(--fs-xs);
+  color: var(--color-error);
+  display: none;
+}
+
+.form-field .field-error.show {
+  display: block;
+}
+
+/* === Character Count === */
+.char-count {
+  font-size: var(--fs-xs);
+  color: var(--color-fg-subtle);
+  text-align: right;
+}
+
+.char-count.over {
+  color: var(--color-error);
+}
+
+@media (max-width: 767px) {
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .contact__form-row {
+    grid-template-columns: 1fr;
+  }
+}
