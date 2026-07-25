@@ -1,111 +1,103 @@
-let postsData = [];
-let currentCategory = 'all';
-let currentSearch = '';
+var projectsData = [];
+var currentFilter = 'all';
+var currentSearch = '';
 
 document.addEventListener('DOMContentLoaded', function () {
-  loadPosts();
-  initBlogCategories();
-  initBlogSearch();
+  loadProjects();
+  initSearch();
   initReadingProgress();
 });
 
-function loadPosts() {
-  const grid = document.getElementById('blog-grid');
+function loadProjects() {
+  var grid = document.getElementById('blog-grid');
   if (!grid) return;
 
   showLoading(grid);
 
-  fetch('data/posts.json')
+  fetch('data/projects.json')
     .then(function (res) {
-      if (!res.ok) throw new Error('Failed to load posts');
+      if (!res.ok) throw new Error('Failed to load projects');
       return res.json();
     })
     .then(function (data) {
-      postsData = data.map(function (post) {
-        var words = post.content ? post.content.trim().split(/\s+/).length : 0;
-        return {
-          ...post,
-          readingTime: Math.max(1, Math.ceil(words / 200)),
-        };
-      });
-      renderPosts(postsData);
-      populateCategories(postsData);
+      projectsData = data;
+      renderProjects(data);
+      populateFilters(data);
+      if (window.initRevealAnimations) {
+        window.initRevealAnimations();
+      }
     })
     .catch(function () {
-      showError(grid, 'Failed to load blog posts. Please try again later.');
+      showError(grid, 'Failed to load projects. Please try again later.');
     });
 }
 
-function renderPosts(posts) {
-  const grid = document.getElementById('blog-grid');
+function renderProjects(projects) {
+  var grid = document.getElementById('blog-grid');
   if (!grid) return;
 
-  if (posts.length === 0) {
+  if (projects.length === 0) {
     grid.innerHTML =
-      '<div class="empty-state col-span-full"><p class="empty-state__title">No posts found</p><p class="text-muted">Try adjusting your search or filter.</p></div>';
+      '<div class="empty-state col-span-full"><p class="empty-state__title">No projects found</p><p class="text-muted">Try adjusting your search or filter.</p></div>';
     return;
   }
 
-  grid.innerHTML = posts
-    .map(function (post) {
+  grid.innerHTML = projects
+    .map(function (project) {
+      var liveUrl = project.live || project.github;
       return (
         '<article class="blog-card reveal">' +
+        '<a href="' + liveUrl + '" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">' +
         '<div class="blog-card__image-placeholder">' +
-        escapeHtml(post.icon || '📝') +
+        escapeHtml(project.icon || '📱') +
         '</div>' +
         '<div class="blog-card__body">' +
         '<div class="blog-card__meta">' +
         '<span class="blog-card__category">' +
-        escapeHtml(post.category) +
+        escapeHtml(project.tags.slice(0, 2).join(', ')) +
         '</span>' +
-        '<span class="blog-card__read-time">' +
-        formatDate(post.date) +
-        ' · ' +
-        post.readingTime +
-        ' min read</span>' +
         '</div>' +
         '<h3 class="blog-card__title">' +
-        escapeHtml(post.title) +
+        escapeHtml(project.title) +
         '</h3>' +
         '<p class="blog-card__excerpt">' +
-        escapeHtml(post.excerpt) +
+        escapeHtml(project.summary) +
         '</p>' +
         '<div class="blog-card__footer">' +
-        '<a href="' +
-        escapeHtml(post.url) +
-        '" class="blog-card__link">Read Article →</a>' +
+        '<span class="blog-card__link">' +
+        (project.live ? 'View Live Demo →' : 'View Source →') +
+        '</span>' +
         '</div>' +
         '</div>' +
+        '</a>' +
         '</article>'
       );
     })
     .join('');
 
-  posts.forEach(function () {
-    if (window.initRevealAnimations) window.initRevealAnimations();
-  });
+  if (window.initRevealAnimations) window.initRevealAnimations();
 }
 
-function populateCategories(posts) {
-  var categories = ['all'];
-  posts.forEach(function (post) {
-    if (categories.indexOf(post.category) === -1) {
-      categories.push(post.category);
-    }
+function populateFilters(projects) {
+  var tagSet = {};
+  projects.forEach(function (p) {
+    p.tags.forEach(function (t) {
+      tagSet[t] = true;
+    });
   });
+  var tags = Object.keys(tagSet).sort();
+  var allTags = ['all'].concat(tags);
 
   var container = document.getElementById('blog-categories');
   if (!container) return;
 
-  container.innerHTML = categories
-    .map(function (cat) {
+  container.innerHTML = allTags
+    .map(function (tag) {
       return (
         '<button class="blog-category-btn' +
-        (cat === currentCategory ? ' active' : '') +
-        '" data-category="' +
-        cat +
-        '">' +
-        cat.charAt(0).toUpperCase() + cat.slice(1) +
+        (tag === currentFilter ? ' active' : '') +
+        '" data-filter="' + tag + '">' +
+        tag.charAt(0).toUpperCase() + tag.slice(1) +
         '</button>'
       );
     })
@@ -117,17 +109,13 @@ function populateCategories(posts) {
         b.classList.remove('active');
       });
       btn.classList.add('active');
-      currentCategory = btn.getAttribute('data-category');
-      filterAndSearchPosts();
+      currentFilter = btn.getAttribute('data-filter');
+      searchAndFilter();
     });
   });
 }
 
-function initBlogCategories() {
-
-}
-
-function initBlogSearch() {
+function initSearch() {
   var input = document.getElementById('blog-search-input');
   if (!input) return;
 
@@ -135,17 +123,19 @@ function initBlogSearch() {
     'input',
     debounce(function () {
       currentSearch = input.value.toLowerCase().trim();
-      filterAndSearchPosts();
+      searchAndFilter();
     }, 300)
   );
 }
 
-function filterAndSearchPosts() {
-  var filtered = postsData;
+function searchAndFilter() {
+  var filtered = projectsData;
 
-  if (currentCategory !== 'all') {
+  if (currentFilter !== 'all') {
     filtered = filtered.filter(function (p) {
-      return p.category.toLowerCase() === currentCategory;
+      return p.tags.some(function (t) {
+        return t.toLowerCase() === currentFilter;
+      });
     });
   }
 
@@ -153,7 +143,7 @@ function filterAndSearchPosts() {
     filtered = filtered.filter(function (p) {
       return (
         p.title.toLowerCase().indexOf(currentSearch) !== -1 ||
-        p.excerpt.toLowerCase().indexOf(currentSearch) !== -1 ||
+        p.summary.toLowerCase().indexOf(currentSearch) !== -1 ||
         p.tags.some(function (t) {
           return t.toLowerCase().indexOf(currentSearch) !== -1;
         })
@@ -161,7 +151,7 @@ function filterAndSearchPosts() {
     });
   }
 
-  renderPosts(filtered);
+  renderProjects(filtered);
 }
 
 function initReadingProgress() {
@@ -180,7 +170,7 @@ function initReadingProgress() {
 
 function showLoading(container) {
   container.innerHTML =
-    '<div class="loading-state"><div class="spinner spinner--lg"></div><p>Loading posts...</p></div>';
+    '<div class="loading-state"><div class="spinner spinner--lg"></div><p>Loading projects...</p></div>';
 }
 
 function showError(container, message) {

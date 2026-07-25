@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initContactForm();
   initCharacterCounts();
-  showToast('success', 'Welcome! Feel free to reach out.');
 });
 
 function initContactForm() {
@@ -21,7 +20,6 @@ function initContactForm() {
   });
 
   form.addEventListener('submit', function (e) {
-    e.preventDefault();
     var isValid = true;
 
     fields.forEach(function (field) {
@@ -31,11 +29,14 @@ function initContactForm() {
     });
 
     if (!isValid) {
+      e.preventDefault();
       showFormStatus('error', 'Please fix the errors before submitting.');
       return;
     }
 
-    submitForm(form);
+    var submitBtn = form.querySelector('.contact__submit');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
   });
 }
 
@@ -97,30 +98,6 @@ function showFormStatus(type, message) {
   }, 5000);
 }
 
-function submitForm(form) {
-  var submitBtn = form.querySelector('.contact__submit');
-  var originalText = submitBtn.innerHTML;
-
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
-
-  var formData = new FormData(form);
-
-  var statusEl = document.getElementById('form-status');
-  statusEl.className = 'contact__form-status success';
-  statusEl.textContent = 'Thanks! Your message has been sent successfully.';
-  statusEl.style.display = 'block';
-
-  setTimeout(function () {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalText;
-    form.reset();
-    setTimeout(function () {
-      statusEl.style.display = 'none';
-    }, 5000);
-  }, 1500);
-}
-
 function initCharacterCounts() {
   var messageField = document.getElementById('message');
   if (!messageField) return;
@@ -135,21 +112,4 @@ function initCharacterCounts() {
     countEl.textContent = len + ' / ' + max;
     countEl.classList.toggle('over', len > max * 0.9);
   });
-}
-
-function showToast(type, message) {
-  var existing = document.querySelector('.toast');
-  if (existing) existing.remove();
-
-  var toast = document.createElement('div');
-  toast.className = 'toast toast--' + type;
-  toast.innerHTML =
-    '<span>' + message + '</span>' +
-    '<button class="btn-close" onclick="this.parentElement.remove()" aria-label="Close">&times;</button>';
-
-  document.body.appendChild(toast);
-
-  setTimeout(function () {
-    if (toast.parentElement) toast.remove();
-  }, 4000);
 }
