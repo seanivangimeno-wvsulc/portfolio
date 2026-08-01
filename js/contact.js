@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initContactForm();
   initCharacterCounts();
-  showToast('success', 'Welcome! Feel free to reach out.');
 });
 
 function initContactForm() {
@@ -22,8 +21,15 @@ function initContactForm() {
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var isValid = true;
 
+    var formStatus = document.getElementById('form-status');
+    formStatus.style.display = 'none';
+
+    fields.forEach(function (field) {
+      clearFieldError(field, document.getElementById(field.id + '-error'));
+    });
+
+    var isValid = true;
     fields.forEach(function (field) {
       if (!validateField(field)) {
         isValid = false;
@@ -35,7 +41,40 @@ function initContactForm() {
       return;
     }
 
-    submitForm(form);
+    var submitBtn = form.querySelector('.contact__submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    var formData = new FormData(form);
+
+    fetch('contact.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (data.success) {
+        showFormStatus('success', data.message);
+        form.reset();
+        initCharacterCounts();
+      } else {
+        for (var key in data.errors) {
+          var field = document.getElementById(key);
+          var errEl = document.getElementById(key + '-error');
+          if (field && errEl) {
+            showFieldError(field, errEl, data.errors[key]);
+          }
+        }
+        showFormStatus('error', 'Please fix the errors before submitting.');
+      }
+    })
+    .catch(function () {
+      showFormStatus('error', 'Something went wrong. Please try again later.');
+    })
+    .finally(function () {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message \u2192';
+    });
   });
 }
 
@@ -91,34 +130,6 @@ function showFormStatus(type, message) {
   status.className = 'contact__form-status ' + type;
   status.textContent = message;
   status.style.display = 'block';
-
-  setTimeout(function () {
-    status.style.display = 'none';
-  }, 5000);
-}
-
-function submitForm(form) {
-  var submitBtn = form.querySelector('.contact__submit');
-  var originalText = submitBtn.innerHTML;
-
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
-
-  var formData = new FormData(form);
-
-  var statusEl = document.getElementById('form-status');
-  statusEl.className = 'contact__form-status success';
-  statusEl.textContent = 'Thanks! Your message has been sent successfully.';
-  statusEl.style.display = 'block';
-
-  setTimeout(function () {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalText;
-    form.reset();
-    setTimeout(function () {
-      statusEl.style.display = 'none';
-    }, 5000);
-  }, 1500);
 }
 
 function initCharacterCounts() {
@@ -130,26 +141,12 @@ function initCharacterCounts() {
 
   var max = messageField.getAttribute('maxlength') || 1000;
 
-  messageField.addEventListener('input', function () {
+  function updateCount() {
     var len = messageField.value.length;
     countEl.textContent = len + ' / ' + max;
     countEl.classList.toggle('over', len > max * 0.9);
-  });
-}
+  }
 
-function showToast(type, message) {
-  var existing = document.querySelector('.toast');
-  if (existing) existing.remove();
-
-  var toast = document.createElement('div');
-  toast.className = 'toast toast--' + type;
-  toast.innerHTML =
-    '<span>' + message + '</span>' +
-    '<button class="btn-close" onclick="this.parentElement.remove()" aria-label="Close">&times;</button>';
-
-  document.body.appendChild(toast);
-
-  setTimeout(function () {
-    if (toast.parentElement) toast.remove();
-  }, 4000);
+  updateCount();
+  messageField.addEventListener('input', updateCount);
 }

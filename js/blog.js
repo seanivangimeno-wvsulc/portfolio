@@ -13,27 +13,22 @@ function loadPosts() {
   const grid = document.getElementById('blog-grid');
   if (!grid) return;
 
-  showLoading(grid);
+  // Data now comes from PHP + PDO (see window.POSTS_DATA set in blog.php),
+  // instead of a fetch('data/posts.json') call against a static file.
+  if (!window.POSTS_DATA) {
+    showError(grid, 'Failed to load blog posts. Please try again later.');
+    return;
+  }
 
-  fetch('data/posts.json')
-    .then(function (res) {
-      if (!res.ok) throw new Error('Failed to load posts');
-      return res.json();
-    })
-    .then(function (data) {
-      postsData = data.map(function (post) {
-        var words = post.content ? post.content.trim().split(/\s+/).length : 0;
-        return {
-          ...post,
-          readingTime: Math.max(1, Math.ceil(words / 200)),
-        };
-      });
-      renderPosts(postsData);
-      populateCategories(postsData);
-    })
-    .catch(function () {
-      showError(grid, 'Failed to load blog posts. Please try again later.');
-    });
+  postsData = window.POSTS_DATA.map(function (post) {
+    var words = post.content ? post.content.trim().split(/\s+/).length : 0;
+    return {
+      ...post,
+      readingTime: Math.max(1, Math.ceil(words / 200)),
+    };
+  });
+  renderPosts(postsData);
+  populateCategories(postsData);
 }
 
 function renderPosts(posts) {
@@ -176,11 +171,6 @@ function initReadingProgress() {
       bar.style.width = progress + '%';
     }
   });
-}
-
-function showLoading(container) {
-  container.innerHTML =
-    '<div class="loading-state"><div class="spinner spinner--lg"></div><p>Loading posts...</p></div>';
 }
 
 function showError(container, message) {
